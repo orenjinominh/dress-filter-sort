@@ -3,14 +3,12 @@ import React from 'react';
 class SizeForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {size: 0};
-
     this.handleChange = this.handleChange.bind(this);
 
   }
 
   handleChange(event) {
-    this.setState({size: parseInt(event.target.value)});
+    this.props.onSizeChange(parseInt(event.target.value));
   }
 
 
@@ -19,7 +17,8 @@ class SizeForm extends React.Component {
       <form>
         <label>
           What's Your Dress Size?  
-          <select value={this.state.color} onChange={this.handleChange}>
+          <select value={this.props.size} onChange={this.handleChange}>
+          <option value="">Show All Sizes</option>
             <option value="0">0</option>
             <option value="2">2</option>
             <option value="4">4</option>

@@ -21,6 +21,7 @@ class ColorForm extends React.Component {
         <label>
           Pick your favorite color: 
           <select value={this.props.color} onChange={this.handleChange}>
+            <option value="">Show All Colors</option>
             <option value="Red">Red</option>
             <option value="Blue">Blue</option>
             <option value="Yellow">Yellow</option>
