@@ -11,7 +11,6 @@ class App extends React.Component {
     super();
     this.state = {
       data: dressData,
-      filtered: [],
       color: '',
       size: '', 
       sortByPriceLowToHigh: false
@@ -32,38 +31,38 @@ class App extends React.Component {
 
   handleColorChange(color) {
     // this seems to keep separate filters functional by color
-    if (this.state.color !== color) {
-      this.setState({filtered: []});
+    if (this.state.color !== color && this.state.size === '') {
+      this.setState({data: dressData});
     }
 
     this.setState({color: color}, () => {
-      let dataToFilter = this.state.filtered.length > 0 ? this.state.filtered : this.state.data;
+      let dataToFilter = this.state.data;
       let filtered = dataToFilter.filter((dress) => { return dress.color === color; });
-      this.setState({filtered: filtered}, () => {console.log('filtered array here', this.state.filtered)});
+      this.setState({data: filtered}, () => {console.log('filtered by color array here', this.state.data)});
+
 
     });
   }
   /* handleSizeChange uses the same functionality to update current size and data on state*/
   handleSizeChange(size) {
-    if (this.state.size !== size) {
-      this.setState({filtered: []});
+    if (this.state.size !== size && this.state.color === '') {
+      this.setState({data: dressData});
     }
 
     this.setState({size: size}, () => {
-      let dataToFilter = this.state.filtered.length > 0 ? this.state.filtered : this.state.data;
+      let dataToFilter = this.state.data;
       let filtered = dataToFilter.filter((dress) => { return dress.size === size;  });
-
-      this.setState({filtered: filtered});
+      this.setState({data: filtered}, () => {console.log('filtered by size array here', this.state.data)});
+  
     });
   } 
 
   handleReset() {
-    this.setState({filtered: [], color: '', size: ''});
-
+    this.setState({data: dressData, color: '', size: ''});
   }
 
   render() {
-    let renderedData = this.state.filtered.length > 0 ? this.state.filtered : this.state.data; 
+    let renderedData = this.state.data;
     return (
       <div className="App">
         <header className="App-header">
