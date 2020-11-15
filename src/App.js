@@ -12,57 +12,40 @@ class App extends React.Component {
     this.state = {
       data: dressData,
       color: '',
-      size: '', 
-      sortByPriceLowToHigh: false
+      size: ''
     }
 
     this.handleColorChange = this.handleColorChange.bind(this);
     this.handleSizeChange = this.handleSizeChange.bind(this);
-    this.handleReset= this.handleReset.bind(this);
-
-
   }
 
-  /* handleColorChange updates state color, updates current state's data array 
-  first, it grabs the color selected from dropdown menu
-  then, it updates the color state
-  then, we asynchronously reset state data to the new data array filtered by color
-  that way, we can apply multiple filters :D */
 
   handleColorChange(color) {
-    // this seems to keep separate filters functional by color
-    if (this.state.color !== color && this.state.size === '') {
-      this.setState({data: dressData});
-    }
+    this.setState( {color: color}, () => {console.log('dresses filtered by this color:', this.state.color)} );
 
-    this.setState({color: color}, () => {
-      let dataToFilter = this.state.data;
-      let filtered = dataToFilter.filter((dress) => { return dress.color === color; });
-      this.setState({data: filtered}, () => {console.log('filtered by color array here', this.state.data)});
-
-
-    });
   }
-  /* handleSizeChange uses the same functionality to update current size and data on state*/
-  handleSizeChange(size) {
-    if (this.state.size !== size && this.state.color === '') {
-      this.setState({data: dressData});
-    }
 
-    this.setState({size: size}, () => {
-      let dataToFilter = this.state.data;
-      let filtered = dataToFilter.filter((dress) => { return dress.size === size;  });
-      this.setState({data: filtered}, () => {console.log('filtered by size array here', this.state.data)});
+  handleSizeChange(size) {
+    this.setState( {size: size},  () => {console.log('dresses filtered by this size:', this.state.size)})
   
-    });
+
   } 
 
-  handleReset() {
-    this.setState({data: dressData, color: '', size: ''});
-  }
+
 
   render() {
-    let renderedData = this.state.data;
+    // by slicing state, we preserve the state.data to be re-filtered without any resets 
+    let dresses = this.state.data.slice();
+    // filters by size and color, more can be added
+    if (this.state.color !== '') {
+      dresses = dresses.filter((dress) => {return dress['color'] === this.state.color});
+    }
+
+    if (this.state.size !== '') {
+      dresses = dresses.filter((dress) => {return dress['size'] === this.state.size})
+    }
+
+
     return (
       <div className="App">
         <header className="App-header">
@@ -72,11 +55,10 @@ class App extends React.Component {
         <div className="dressFilters">
           <ColorForm color={this.state.color} onColorChange={this.handleColorChange}/>
           <SizeForm size={this.state.size} onSizeChange={this.handleSizeChange}/>
-          <button onClick={this.handleReset}>Reset My Search</button>
           {/* <SortByPriceLowToHigh /> */}
         </div>
         <div className="dressSortResults">
-          {renderedData.map((dressDataItem) => (
+          {dresses.length ? dresses.map((dressDataItem) => (
             <div className="dressGridItem">
               <div className="dressGridImgContainer">
                 <img src={dressDataItem['photo_url']} width={150}/>
@@ -85,7 +67,7 @@ class App extends React.Component {
               <div>Size {dressDataItem['size']}</div>
               <div>Color: {dressDataItem['color']}</div>
             </div>
-          ))}
+          )) : <div>Sorry, we're out of stock in that size and color! Please search again.</div>}
         </div>
       </div>
     );
