@@ -16,19 +16,22 @@ class App extends React.Component {
     }
 
     this.handleColorChange = this.handleColorChange.bind(this);
+    // this.handleSizeChange = this.handleSizeChange.bind(this);
 
 
   }
 
+  /* handleColorChange updates state color, updates current state's data array 
+  first, it grabs the color selected from dropdown menu
+  then, it updates the color state
+  then, we asynchronously reset state data to the new data array filtered by color
+  that way, we can apply multiple filters :D */
 
   handleColorChange(color) {
     this.setState({color: color}, () => {
-      let filtered = dressData.filter((dress) => {
-        console.log('access inside setState for color', color);
-        return dress.color === color;
-      });
-      this.setState({data: filtered}, () => {console.log('Data filtered by color here', this.state.data)});
-      console.log('dress color chosen:', this.state.color)});
+      let filtered = dressData.filter((dress) => { return dress.color === color; });
+      this.setState({data: filtered});
+    });
   }
 
 
@@ -42,7 +45,7 @@ class App extends React.Component {
 
         <div className="dressFilters">
           Put your filter/sort buttons and dropdown menus here
-          <ColorForm color={this.state.color} data={this.state.data} onColorChange={this.handleColorChange}/>
+          <ColorForm color={this.state.color} onColorChange={this.handleColorChange}/>
           <SizeForm />
           {/* <SortByPriceLowToHigh /> */}
         </div>
