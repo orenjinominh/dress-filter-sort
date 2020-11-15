@@ -4,7 +4,7 @@ import './App.css';
 
 import ColorForm from './ColorForm';
 import SizeForm from './SizeForm';
-import { createPortal } from 'react-dom';
+import SortByPriceLowToHigh from './SortByPriceLowToHigh';
 
 class App extends React.Component {
   constructor() {
@@ -12,37 +12,43 @@ class App extends React.Component {
     this.state = {
       data: dressData,
       color: '',
-      size: ''
+      size: '', 
+      sortedByPriceLowToHigh: false
     }
 
     this.handleColorChange = this.handleColorChange.bind(this);
     this.handleSizeChange = this.handleSizeChange.bind(this);
+    this.sortByPrice = this.sortByPrice.bind(this);
   }
 
 
   handleColorChange(color) {
-    this.setState( {color: color}, () => {console.log('dresses filtered by this color:', this.state.color)} );
-
+    this.setState( {color: color}, () => {console.log('dresses filtered by this color:', this.state.color)});
   }
 
   handleSizeChange(size) {
-    this.setState( {size: size},  () => {console.log('dresses filtered by this size:', this.state.size)})
-  
-
+    this.setState( {size: size},  () => {console.log('dresses filtered by this size:', this.state.size)});
   } 
 
+  sortByPrice(sorted) {
+    this.setState({sortedByPriceLowToHigh: sorted}, () => {console.log('sort by ascending order on', this.state.sortByPriceLowToHigh)}); 
+  }
 
 
   render() {
     // by slicing state, we preserve the state.data to be re-filtered without any resets 
     let dresses = this.state.data.slice();
-    // filters by size and color, more can be added
+    // filters by size and color, and sort by price ascending (low to high)
     if (this.state.color !== '') {
       dresses = dresses.filter((dress) => {return dress['color'] === this.state.color});
     }
 
     if (this.state.size !== '') {
       dresses = dresses.filter((dress) => {return dress['size'] === this.state.size})
+    }
+
+    if (this.state.sortedByPriceLowToHigh !== false) {
+      dresses = dresses.sort((a, b) => {return a.price - b.price});
     }
 
 
@@ -55,7 +61,7 @@ class App extends React.Component {
         <div className="dressFilters">
           <ColorForm color={this.state.color} onColorChange={this.handleColorChange}/>
           <SizeForm size={this.state.size} onSizeChange={this.handleSizeChange}/>
-          {/* <SortByPriceLowToHigh /> */}
+          <SortByPriceLowToHigh sorted={this.state.sortedByPriceLowToHigh} sortedByPrice={this.sortByPrice}/>
         </div>
         <div className="dressSortResults">
           {dresses.length ? dresses.map((dressDataItem) => (
