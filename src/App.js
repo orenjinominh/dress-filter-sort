@@ -31,25 +31,31 @@ class App extends React.Component {
   } 
 
   sortByPrice(sorted) {
-    this.setState({sortedByPriceLowToHigh: sorted}, () => {console.log('sort by ascending order on', this.state.sortByPriceLowToHigh)}); 
+    this.setState({sortedByPriceLowToHigh: sorted}, () => {console.log('sort by ascending order on', this.state.sortedByPriceLowToHigh)}); 
   }
 
 
   render() {
     // by slicing state, we preserve the state.data to be re-filtered without any resets 
     let dresses = this.state.data.slice();
+
     // filters by size and color, and sort by price ascending (low to high)
     if (this.state.color !== '') {
       dresses = dresses.filter((dress) => {return dress['color'] === this.state.color});
-    }
+      console.log('dresses filtered by color here', dresses);
+    } 
 
     if (this.state.size !== '') {
-      dresses = dresses.filter((dress) => {return dress['size'] === this.state.size})
-    }
+      dresses = dresses.filter((dress) => {return dress['size'] === this.state.size});
+      console.log('dresses filtered by size here', dresses);
+    } 
 
     if (this.state.sortedByPriceLowToHigh !== false) {
       dresses = dresses.sort((a, b) => {return a.price - b.price});
     }
+
+    console.log('dress data here', dresses);
+
 
 
     return (
@@ -64,7 +70,7 @@ class App extends React.Component {
           <SortByPriceLowToHigh sorted={this.state.sortedByPriceLowToHigh} sortedByPrice={this.sortByPrice}/>
         </div>
         <div className="dressSortResults">
-          {dresses.length ? dresses.map((dressDataItem) => (
+          {dresses.map((dressDataItem) => (
             <div className="dressGridItem">
               <div className="dressGridImgContainer">
                 <img src={dressDataItem['photo_url']} width={150}/>
@@ -73,7 +79,7 @@ class App extends React.Component {
               <div>Size {dressDataItem['size']}</div>
               <div>Color: {dressDataItem['color']}</div>
             </div>
-          )) : <div>Sorry, we're out of stock in that size and color! Please search again.</div>}
+          ))}
         </div>
       </div>
     );

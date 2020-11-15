@@ -8,7 +8,12 @@ class SizeForm extends React.Component {
   }
 
   handleChange(event) {
-    this.props.onSizeChange(parseInt(event.target.value));
+    if (event.target.value) {
+      this.props.onSizeChange(parseInt(event.target.value));
+    } else {
+      // accounts for no filter aka when value of '' is passed to App state
+      this.props.onSizeChange('');
+    }
   }
 
 
