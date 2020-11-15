@@ -21,7 +21,7 @@ class SizeForm extends React.Component {
     return (
       <form>
         <label>
-          What's Your Dress Size?  
+          Dress Size: 
           <select value={this.props.size} onChange={this.handleChange}>
           <option value="">Show All Sizes</option>
             <option value="0">0</option>

@@ -21,7 +21,6 @@ class App extends React.Component {
     this.sortByPrice = this.sortByPrice.bind(this);
   }
 
-
   handleColorChange(color) {
     this.setState( {color: color}, () => {console.log('dresses filtered by this color:', this.state.color)});
   }
@@ -61,7 +60,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          Queenly Interview Take-Home Exercise: Sorting and Filtering Dresses
+          Queenly
         </header>
 
         <div className="dressFilters">
@@ -70,7 +69,7 @@ class App extends React.Component {
           <SortByPriceLowToHigh sorted={this.state.sortedByPriceLowToHigh} sortedByPrice={this.sortByPrice}/>
         </div>
         <div className="dressSortResults">
-          {dresses.map((dressDataItem) => (
+          {dresses.length > 0 ? dresses.map((dressDataItem) => (
             <div className="dressGridItem">
               <div className="dressGridImgContainer">
                 <img src={dressDataItem['photo_url']} width={150}/>
@@ -79,7 +78,7 @@ class App extends React.Component {
               <div>Size {dressDataItem['size']}</div>
               <div>Color: {dressDataItem['color']}</div>
             </div>
-          ))}
+          )) : <div>Out of stock, please try another color or size.</div>}
         </div>
       </div>
     );

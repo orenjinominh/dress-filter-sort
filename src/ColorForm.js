@@ -19,7 +19,7 @@ class ColorForm extends React.Component {
     return (
       <form>
         <label>
-          Pick your favorite color: 
+          Color: 
           <select value={this.props.color} onChange={this.handleChange}>
             <option value="">Show All Colors</option>
             <option value="Red">Red</option>
