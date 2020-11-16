@@ -17,7 +17,6 @@ class SortByPriceLowToHigh extends React.Component {
 
 
   render() {
-    console.log(this.props.sortedByPriceLowToHigh);
     return (
       <form>
         <label>
