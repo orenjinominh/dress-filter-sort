@@ -1,4 +1,4 @@
-# Queenly Take Home Assignment
+# Filter and Sort Dresses (e-Commerce mockup)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
