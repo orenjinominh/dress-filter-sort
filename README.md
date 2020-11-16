@@ -1,6 +1,26 @@
-# Getting Started with Create React App
+# Queenly Take Home Assignment
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+This project sorts and filters dresses from a sample data set, similar to an e-commerce interface. Dresses can be filtered by:
+- color: "Red", "Yellow", and "Blue"
+- size: from size 0 to 14 (women's sizing)
+- price: sorted from low to high
+
+Sort and filters can be applied alone, or with another filter (ie: search by color AND size, search by color from lowest to highest pricing, etc...). 
+
+Filters by color and size are dynamic without page refresh.
+
+For example: 
+- You can choose to view a red dress in size 0 and want to revert back to all colors but keep the size 0 filter (show all colors). 
+- You can choose to view a red dress in size 0 but want to see a red dress in another size or view all red dresses (show all sizes). 
+- You can filter back to all colors and all sizes.   
+
+If a combination of any dress size and color is not in stock, a message will appear asking you to try another color or size filter. 
+
+Sort will sort the dresses' pricing from low to high once if the dropdown option is selected. This sort will apply even if you change the color and size filter(s).
+
+
 
 ## Available Scripts
 
@@ -29,42 +49,3 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

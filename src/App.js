@@ -20,7 +20,6 @@ class App extends React.Component {
     this.handleColorChange = this.handleColorChange.bind(this);
     this.handleSizeChange = this.handleSizeChange.bind(this);
     this.sortByPrice = this.sortByPrice.bind(this);
-    this.filterAndSort = this.filterAndSort.bind(this);
   }
 
 /* handleColorChange
@@ -50,14 +49,8 @@ class App extends React.Component {
     this.setState({sortedByPriceLowToHigh: sorted});
   }
 
-/* filterAndSort
- * filters data by color and size
- * sorts data from lowest to highest price
- * @param {Array} Array of data
- * @return {Array} filtered and/or sorted array of object representing one dress
-*/
-
-  filterAndSort(dresses) {
+  render() {
+    let dresses = this.state.data.slice();
     if (this.state.color !== '') {
       dresses = dresses.filter((dress) => {return dress['color'] === this.state.color});
     }
@@ -69,11 +62,6 @@ class App extends React.Component {
     if (this.state.sortedByPriceLowToHigh !== false) {
       dresses = dresses.sort((a, b) => {return a.price - b.price});
     }
-  }
-
-  render() {
-    let dresses = [...this.state.data];
-    this.filterAndSort(dresses);
 
     return (
       <div className="App">
