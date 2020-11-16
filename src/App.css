@@ -67,43 +67,73 @@
 /** PUT YOUR CSS STYLES BELOW THIS LINE **/
 
 body {
-  font-family: 'Mulish', sans-serif;
-  background-image: url('./assets/cloth-alike.png'); 
-  background-color: #f7eefb ;
+  font-family: "Mulish", sans-serif;
+  background-image: url("./assets/cloth-alike.png");
 }
 
-.App-header, .dressFilters {
-  background:
+.App-header {
+  background: radial-gradient(lightgray 3px, transparent 4px),
     radial-gradient(lightgray 3px, transparent 4px),
-    radial-gradient(lightgray 3px, transparent 4px),
-    linear-gradient(#f7eefb 4px, transparent 0),
-    linear-gradient(45deg, transparent 74px, transparent 75px, #a4a4a4 75px, #a4a4a4 76px, transparent 77px, transparent 109px),
-    linear-gradient(-45deg, transparent 75px, transparent 76px, #a4a4a4 76px, #a4a4a4 77px, transparent 78px, transparent 109px),
+    linear-gradient(#fff 4px, transparent 0),
+    linear-gradient(
+      45deg,
+      transparent 74px,
+      transparent 75px,
+      #a4a4a4 75px,
+      #a4a4a4 76px,
+      transparent 77px,
+      transparent 109px
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 75px,
+      transparent 76px,
+      #a4a4a4 76px,
+      #a4a4a4 77px,
+      transparent 78px,
+      transparent 109px
+    ),
     #fff;
-    background-size: 109px 109px, 109px 109px,100% 6px, 109px 109px, 109px 109px;
-    background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
-    color: #9932CC;
+  background-size: 109px 109px, 109px 109px, 100% 6px, 109px 109px, 109px 109px;
+  background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+  border-bottom: solid 2px #b6bec5;
 }
-
-.dressFilters {
-  font-size: 15px;
-}
-
 
 .App-header {
   font-size: 50px;
-  font-weight: bold; 
+  font-weight: bold;
+  color: #9932cc;
 }
 
 .dressSortResults {
   font-size: 15px;
-  color: #9932CC;
-  text-align: left; 
+  text-align: left;
+  justify-content: space-evenly;
 }
 
+.dressFilters {
+  padding: 20px 0;
+  max-width: auto;
+}
+
+.dressGridImgContainer img {
+  height: 200px;
+  object-fit: cover;
+  width: 150px;
+}
+
+.dressFilters form {
+  display: inline;
+  margin-right: 15px;
+}
+
+.dressFilters select {
+  margin: 10px;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+}
 
 footer {
   font-size: 8px;
   text-align: center;
 }
-
