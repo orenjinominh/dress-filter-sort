@@ -8,9 +8,12 @@ class ColorForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
 
   }
-  
+/* handleChange
+ * Sets this.props to value selected from dropdown
+ * @param {Event} color selected from ColorForm.js dropdown
+*/
+
   handleChange(event) {
-    // this.setState({color: event.target.value}, () => {console.log('dress color chosen:', this.state)});
     this.props.onColorChange(event.target.value);
   }
 

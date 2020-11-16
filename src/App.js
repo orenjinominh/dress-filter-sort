@@ -1,10 +1,11 @@
-import React from 'react';
-import { dressData } from './dressData';
-import './App.css';
+import React from "react";
+import { dressData } from "./assets/dressData";
+import "./App.css";
 
-import ColorForm from './ColorForm';
-import SizeForm from './SizeForm';
-import SortByPriceLowToHigh from './SortByPriceLowToHigh';
+/* IMPORT COMPONENTS */
+import ColorForm from "./Components/ColorForm";
+import SizeForm from  "./Components/SizeForm";
+import SortByPriceLowToHigh from "./Components/SortByPriceLowToHigh";
 
 class App extends React.Component {
   constructor() {
@@ -12,57 +13,73 @@ class App extends React.Component {
     this.state = {
       data: dressData,
       color: '',
-      size: '', 
+      size: '',
       sortedByPriceLowToHigh: false
     }
 
     this.handleColorChange = this.handleColorChange.bind(this);
     this.handleSizeChange = this.handleSizeChange.bind(this);
     this.sortByPrice = this.sortByPrice.bind(this);
+    this.filterAndSort = this.filterAndSort.bind(this);
   }
+
+/* handleColorChange
+ * Updates App component state: color
+ * @param {String} color selected from ColorForm.js dropdown
+*/
 
   handleColorChange(color) {
-    this.setState( {color: color}, () => {console.log('dresses filtered by this color:', this.state.color)});
+    this.setState( {color: color});
   }
+
+/* handleSizeChange
+ * Updates App component state: size
+ * @param {Number} size selected from SizeForm.js dropdown OR {String} empty string if no size selected
+*/
 
   handleSizeChange(size) {
-    this.setState( {size: size},  () => {console.log('dresses filtered by this size:', this.state.size)});
-  } 
-
-  sortByPrice(sorted) {
-    this.setState({sortedByPriceLowToHigh: sorted}, () => {console.log('sort by ascending order on', this.state.sortedByPriceLowToHigh)}); 
+    this.setState( {size: size});
   }
 
+/* sortByPrice
+ * Updates App component state: sortedByPriceLowToHigh
+ * @param  {Boolean} From Low to High selected from ColorForm.js dropdown
+*/
 
-  render() {
-    // by slicing state, we preserve the state.data to be re-filtered without any resets 
-    let dresses = this.state.data.slice();
+  sortByPrice(sorted) {
+    this.setState({sortedByPriceLowToHigh: sorted});
+  }
 
-    // filters by size and color, and sort by price ascending (low to high)
+/* filterAndSort
+ * filters data by color and size
+ * sorts data from lowest to highest price
+ * @param {Array} Array of data
+ * @return {Array} filtered and/or sorted array of object representing one dress
+*/
+
+  filterAndSort(dresses) {
     if (this.state.color !== '') {
       dresses = dresses.filter((dress) => {return dress['color'] === this.state.color});
-      console.log('dresses filtered by color here', dresses);
-    } 
+    }
 
     if (this.state.size !== '') {
       dresses = dresses.filter((dress) => {return dress['size'] === this.state.size});
-      console.log('dresses filtered by size here', dresses);
-    } 
+    }
 
     if (this.state.sortedByPriceLowToHigh !== false) {
       dresses = dresses.sort((a, b) => {return a.price - b.price});
     }
+  }
 
-    console.log('dress data here', dresses);
-
-
+  render() {
+    let dresses = [...this.state.data];
+    this.filterAndSort(dresses);
 
     return (
       <div className="App">
         <header className="App-header">
           Queenly
         </header>
-
         <div className="dressFilters">
           <ColorForm color={this.state.color} onColorChange={this.handleColorChange}/>
           <SizeForm size={this.state.size} onSizeChange={this.handleSizeChange}/>

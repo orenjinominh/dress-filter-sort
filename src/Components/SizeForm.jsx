@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 class SizeForm extends React.Component {
   constructor(props) {
@@ -6,6 +6,11 @@ class SizeForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
 
   }
+
+/* handleChange
+ * Sets this.props to value selected from dropdown
+ * @param {Event} size selected from SizeForm.js dropdown OR {String} empty string if no size selected
+*/
 
   handleChange(event) {
     if (event.target.value) {
@@ -21,7 +26,7 @@ class SizeForm extends React.Component {
     return (
       <form>
         <label>
-          Dress Size: 
+          Dress Size:
           <select value={this.props.size} onChange={this.handleChange}>
           <option value="">Show All Sizes</option>
             <option value="0">0</option>
